@@ -1,0 +1,40 @@
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+.gradle/6.7/executionHistory/executionHistory.lock
+.gradle/6.7/fileChanges/last-build.bin
+.gradle/6.7/fileHashes/fileHashes.lock
+.gradle/6.7/gc.properties
+.gradle/buildOutputCleanup/buildOutputCleanup.lock
+.gradle/buildOutputCleanup/cache.properties
+.gradle/checksums/checksums.lock
+.gradle/configuration-cache/gc.properties
+.gradle/vcs-1/gc.properties
+.idea/artifacts/XRP_Tipper_jar.xml
+.idea/compiler.xml
+.idea/jarRepositories.xml
+.idea/misc.xml
+.idea/vcs.xml
+XRP Tipper.iml
+target/classes/plugin.yml
+target/classes/config.yml
