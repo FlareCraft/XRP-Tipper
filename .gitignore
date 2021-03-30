@@ -39,3 +39,4 @@ XRP Tipper.iml
 target/classes/plugin.yml
 target/classes/config.yml
 .idea/workspace.xml
+.idea/*
