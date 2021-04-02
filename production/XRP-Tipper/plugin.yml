@@ -1,0 +1,12 @@
+name: XRPTipper
+version: 0.1.0
+author: Fabian Sordello
+main: com.flarecraft.xrptipper.XRPTipper
+api-version: 1.16
+commands:
+  xrpRegister:
+    description: Register your XRP public address to the server
+    usage: /xrpRegister
+  xrpTip:
+    description: Tip the server in XRP
+    usage: /xrpTip
