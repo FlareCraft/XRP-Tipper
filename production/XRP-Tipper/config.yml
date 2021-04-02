@@ -1,0 +1,9 @@
+## General settings ##
+General:
+  Server:
+    # Tips to the server will be sent to this address
+    XRP_Wallet_Address:
+    XUMM:
+      # ** REQUIRED ** - See the instructions on [website name] to fill in these values.
+      API_KEY:
+      API_SECRET:
