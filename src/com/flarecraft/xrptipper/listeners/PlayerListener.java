@@ -16,7 +16,6 @@ public class PlayerListener implements Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onPlayerJoin(PlayerJoinEvent event) {
 
-        System.out.println("XRPTipper - Player has joined the game");
         Player player = event.getPlayer();
         new PlayerProfileLoadingTask(player).runTaskLaterAsynchronously(XRPTipper.p, 60);
     }

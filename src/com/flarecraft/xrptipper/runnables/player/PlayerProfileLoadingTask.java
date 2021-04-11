@@ -28,7 +28,7 @@ public class PlayerProfileLoadingTask extends BukkitRunnable {
 
         PlayerProfile profile = XRPTipper.getDatabaseManager().loadPlayerProfile(player.getName(), player.getUniqueId(), true);
 
-        if (profile.isLoaded()) {
+        if (profile != null) {
 
             new ApplySuccessfulProfile(new XRPTipperPlayer(player, profile)).runTask(XRPTipper.p);
         }

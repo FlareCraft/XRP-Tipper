@@ -39,7 +39,6 @@ public class XUMMWebSocketClient {
     @OnMessage
     public void onMessage(String message, Session session) {
 
-        logger.info("Received ...." + message);
         handleWebsocketMessage(message, session);
     }
 
