@@ -39,7 +39,6 @@ public class PlayerProfile {
     public void save(boolean useSync) {
 
         PlayerProfile profileCopy = new PlayerProfile(playerName, uuid, xrplAddress, xummToken);
-        System.out.println(profileCopy);
         changed = !XRPTipper.getDatabaseManager().saveUser(profileCopy);
 
         if (changed) {

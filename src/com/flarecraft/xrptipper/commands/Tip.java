@@ -16,11 +16,8 @@ public class Tip implements CommandExecutor {
         System.out.println("Player has executed the 'Tip' command");
         Player playa = (Player) sender;
         XRPTipperPlayer test = UserManager.getPlayer(playa);
-        System.out.println(test.getProfile().getPlayerName());
         // Probably need to put a try/catch handling here to ensure that I get an Int
-        System.out.println(strings[0]);
         double paymentAmount = Double.parseDouble(strings[0]);
-        System.out.println(paymentAmount);
         TransactionController.tipHandler(test.getProfile(), paymentAmount);
         return true;
     }

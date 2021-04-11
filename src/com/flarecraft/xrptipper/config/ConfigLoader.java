@@ -15,8 +15,6 @@ public class ConfigLoader {
 
     public ConfigLoader(String fileName) {
         this.fileName = fileName;
-        System.out.println("I'm in the ConfigLoader");
-        System.out.println("getDataFolder is:" + plugin.getDataFolder());
         configFile = new File(plugin.getDataFolder(), fileName);
         loadFile();
 

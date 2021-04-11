@@ -39,8 +39,6 @@ public class FlatfileDatabaseManager implements DatabaseManager {
     //TODO: Investigate to see if a new user should be created immediately or on logout (are preference held in memory at first?)
     public void newUser(String playerName, UUID uuid, String xrplAddress) {
 
-        System.out.println("PlayerName: " + playerName);
-        System.out.println("UUID: " + uuid);
         BufferedWriter out = null;
         synchronized (fileWritingLock) {
 
@@ -86,7 +84,6 @@ public class FlatfileDatabaseManager implements DatabaseManager {
 
                     //Currently I'm assuming every player has a UUID.
                     // I don't know when that wouldn't be the case, but I may need to learn more
-                    System.out.println(character[UUID_INDEX]);
                     if (uuid != null && !character[UUID_INDEX].equalsIgnoreCase(uuid.toString())) {
                         continue;
                     }

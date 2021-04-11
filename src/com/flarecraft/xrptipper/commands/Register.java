@@ -18,7 +18,6 @@ public class Register implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        System.out.println("Player has executed the 'Register' command");
         Player playa = (Player) sender;
         if (args.length == 0) {
 
@@ -29,11 +28,8 @@ public class Register implements CommandExecutor {
         //if profile doesn't exist, create user in flatfile
         try {
 
-            System.out.println("User Manager Call");
             XRPTipperPlayer player = UserManager.getPlayer(playa);
-            System.out.println("getProfile call");
             PlayerProfile profile = player.getProfile();
-            System.out.println(profile.getPlayerName());
 
             profile.setXrplAddress(args[0]);
         } catch (NullPointerException e) {

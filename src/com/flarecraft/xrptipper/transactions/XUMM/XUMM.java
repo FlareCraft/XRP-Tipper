@@ -18,13 +18,11 @@ public class XUMM {
 
     private void setApiKey() {
 
-        System.out.println(Config.getInstance().getXUMMApiKey());
         this.apiKey = Config.getInstance().getXUMMApiKey();
     }
 
     private void setApiSecret() {
 
-        System.out.println(Config.getInstance().getXUMMApiSecret());
         this.apiSecret = Config.getInstance().getXUMMApiSecret();
     }
 
@@ -40,8 +38,6 @@ public class XUMM {
 
     public void paymentRequest(String paymentDestination, BigInteger paymentAmount, String userToken) {
 
-        System.out.println("I got to the payment request");
-        System.out.println(paymentAmount);
         String paymentRequestJsonBody = "{ \n" +
                 "  \"txjson\": {\n" +
                 "    \"TransactionType\": \"Payment\",\n" +
@@ -55,10 +51,6 @@ public class XUMM {
                 MediaType.parse("application/json"), paymentRequestJsonBody
         );
 
-        System.out.println("Set the request body");
-        System.out.println("ApiKey is :" + this.apiKey);
-        System.out.println(getApiKey());
-        System.out.println(getApiSecret());
 
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         Request request = new Request.Builder()
@@ -81,7 +73,6 @@ public class XUMM {
 
     public Response signRequest(String userAddress) {
 
-        System.out.println("I got to the sign request");
         String signRequestJSONBody = "{\n" +
                 "   \"txjson\":{\n" +
                 "       \"TransactionType\":\"SignIn\",\n" +

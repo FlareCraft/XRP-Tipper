@@ -24,11 +24,10 @@ public class PlayerListener implements Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onPlayerQuit(PlayerQuitEvent event) {
 
-        System.out.println("I made it to on Player Quit");
         Player player = event.getPlayer();
 
         if (!UserManager.hasPlayerDataKey(player)) {
-            System.out.println("Player Data Key return");
+
             return;
         }
 
@@ -36,7 +35,6 @@ public class PlayerListener implements Listener {
 
         if(xrpTipperPlayer == null) {
 
-            System.out.println("xrpTipperPlayer is null");
             return;
         }
 
