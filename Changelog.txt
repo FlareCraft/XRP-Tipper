@@ -1,0 +1,11 @@
+v0.1.2
+    Cleanup logging
+    Added player messaging to let them know registration was successful
+    Made config.yml more user friendly and added instructions
+    Fixed login error when player logs in without a registered profile
+
+v0.1.1:
+    Fixed issue with plugin naming convention affecting startup
+
+v0.1.0:
+    Released the plugin

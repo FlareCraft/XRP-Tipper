@@ -1,5 +1,5 @@
 name: XRPTipper
-version: 0.1.0
+version: 0.1.2
 author: Fabian Sordello
 main: com.flarecraft.xrptipper.XRPTipper
 api-version: 1.16
@@ -8,5 +8,5 @@ commands:
     description: Register your XRP public address to the server
     usage: /xrpRegister
   xrpTip:
-    description: Tip the server in XRP
+    description: Tip the server in XRP. Can tip in fractional amounts down to .00001
     usage: /xrpTip

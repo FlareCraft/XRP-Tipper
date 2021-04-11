@@ -30,7 +30,6 @@ public class XRPTipperPlayer {
 
     public void logout(boolean syncSave) {
 
-        System.out.println("I made it to logout");
         Player thisPlayer = getPlayer();
 
         if(syncSave) {

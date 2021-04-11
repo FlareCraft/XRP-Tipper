@@ -29,7 +29,6 @@ public class XUMMWebSocketClient {
 
         try {
 
-            System.out.println("onOpenJustFired");
             session.getBasicRemote().sendText("start");
 
         } catch (IOException e) {
@@ -40,7 +39,6 @@ public class XUMMWebSocketClient {
     @OnMessage
     public void onMessage(String message, Session session) {
 
-        logger.info("Received ...." + message);
         handleWebsocketMessage(message, session);
     }
 
@@ -82,20 +80,16 @@ public class XUMMWebSocketClient {
     @OnClose
     public void onClose(Session session, CloseReason closeReason) {
 
-        System.out.println("checking2");
         latch.countDown();
-
     }
 
     public static void watchForASign(String signUUID ) {
 
-        System.out.println("I'm starting the main method");
         latch = new CountDownLatch(1);
         ClientManager client = ClientManager.createClient();
 
         try {
 
-            System.out.println("I made it farther");
             client.connectToServer(XUMMWebSocketClient.class, new URI("wss://xumm.app/sign/" + signUUID));
             latch.await();
         } catch (DeploymentException | URISyntaxException | IOException | InterruptedException e) {
@@ -104,6 +98,5 @@ public class XUMMWebSocketClient {
         }
 
         client.shutdown();
-        System.out.println("Do new things happen in the meantime?");
     }
 }

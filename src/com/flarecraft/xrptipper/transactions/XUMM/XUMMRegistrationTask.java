@@ -21,12 +21,11 @@ public class XUMMRegistrationTask extends BukkitRunnable {
     public void run() {
 
         String userToken = TransactionController.handleRegistration(address, player);
-        System.out.println(userToken);
         XRPTipperPlayer XRPPlayer = UserManager.getPlayer(player);
         PlayerProfile profile = XRPPlayer.getProfile();
         profile.setXummToken(userToken);
 
-        System.out.println(profile.getXummToken());
+        player.sendMessage("Registration complete! Use the xrptip command to send a tip.");
         // Next I need to take the user token and apply it to the players profile.
     }
 }

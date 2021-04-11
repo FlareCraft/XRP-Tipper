@@ -16,7 +16,6 @@ public class TransactionController {
 
     public static void tipHandler(PlayerProfile profile, double paymentAmount) {
 
-        System.out.println("I'm inside the tipHandler");
         System.out.println("Server wallet address is: " + Config.getInstance().getServerWalletAddress());
         XUMM xummController = XRPTipper.getXumm();
         // Should the server wallet address be pulled from config every time? Or should it be loaded on startup?
@@ -24,8 +23,6 @@ public class TransactionController {
     }
 
     public static String handleRegistration(String address, Player player) {
-
-        System.out.println("generateRegistrationLink entered");
 
         XUMM xummController = XRPTipper.getXumm();
         Response response = xummController.signRequest(address);
@@ -35,10 +32,8 @@ public class TransactionController {
 
         player.sendMessage("Click the link below. Scan the provided QR code with XUMM to register");
         player.sendMessage("Link: " + registrationLink);
-        System.out.println(registrationLink);
 
         XUMMWebSocketClient.watchForASign(registrationUUID);
-        System.out.println("I saw the sign!");
 
         Response userTokenResponse = xummController.getUserTokenRequest(registrationUUID);
         JSONObject userTokenResponseObject = ResponseParser.getResponseJSONObject(userTokenResponse);

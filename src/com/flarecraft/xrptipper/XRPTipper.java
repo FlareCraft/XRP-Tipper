@@ -81,7 +81,6 @@ public class XRPTipper extends JavaPlugin {
 
     private void setupPaymentProviders() {
 
-        System.out.println("I'm setting up payment providers");
         xumm = new XUMM();
     }
 
