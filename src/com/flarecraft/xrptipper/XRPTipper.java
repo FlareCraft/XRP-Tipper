@@ -5,6 +5,7 @@ import com.flarecraft.xrptipper.database.DatabaseManager;
 import com.flarecraft.xrptipper.database.DatabaseManagerFactory;
 import com.flarecraft.xrptipper.listeners.PlayerListener;
 import com.flarecraft.xrptipper.transactions.XUMM.XUMM;
+import com.flarecraft.xrptipper.util.player.UserManager;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -17,6 +18,8 @@ public class XRPTipper extends JavaPlugin {
     public XRPTipper() {
         p = this;
     }
+
+    private static boolean serverShutdownExecuted = false;
 
     /* Managers */
     private static DatabaseManager databaseManager;
@@ -46,6 +49,17 @@ public class XRPTipper extends JavaPlugin {
     @Override
     public void onDisable() {
 
+        setServerShutdown(true);
+        XRPTipper.p.getLogger().info("Server shutdown has been executed, executing shutdown procedures...");
+
+        try {
+
+            UserManager.saveAll();
+            UserManager.clearAll();
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
     }
 
     public static DatabaseManager getDatabaseManager() {
@@ -68,6 +82,10 @@ public class XRPTipper extends JavaPlugin {
         return xumm;
     }
 
+    public static synchronized boolean isServerShutdownExecuted() {
+        return serverShutdownExecuted;
+    }
+
     private void setupFilePaths() {
 
         //xrptipper = getFile();
@@ -82,6 +100,11 @@ public class XRPTipper extends JavaPlugin {
     private void setupPaymentProviders() {
 
         xumm = new XUMM();
+    }
+
+    private void setServerShutdown(boolean state) {
+
+        serverShutdownExecuted = state;
     }
 
     private void registerEvents() {

@@ -52,7 +52,15 @@ public class PlayerProfile {
             if(saveAttempts < 10) {
 
                 saveAttempts++;
-                scheduleAsyncSave();
+
+                if(XRPTipper.isServerShutdownExecuted() || useSync) {
+
+                    new PlayerProfileSaveTask(this, true).runTask(XRPTipper.p);
+                }
+                else {
+
+                    scheduleAsyncSave();
+                }
                 //TODO: Some server shutdown code needs to live here
             } else {
                 XRPTipper.p.getLogger().severe("XRPTipper has failed to save the profile for "
