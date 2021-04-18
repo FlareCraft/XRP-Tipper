@@ -26,6 +26,7 @@ public class XRPTipperPlayer {
 
     public PlayerProfile getProfile() {
         return profile;
+
     }
 
     public void logout(boolean syncSave) {
@@ -35,10 +36,15 @@ public class XRPTipperPlayer {
         if(syncSave) {
             getProfile().save(true);
         } else {
+            getProfile().scheduleAsyncSave();
             // TODO: I think that server saving goes here
         }
 
         UserManager.remove(thisPlayer);
 
+    }
+
+    public String getPlayerName() {
+        return playerName;
     }
 }
