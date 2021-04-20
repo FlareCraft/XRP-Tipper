@@ -12,14 +12,20 @@ import org.bukkit.entity.Player;
 import org.json.simple.JSONObject;
 
 
-public class TransactionController {
+public class TransactionController extends Exception {
 
-    public static void tipHandler(PlayerProfile profile, double paymentAmount) {
+    public static void tipHandler(PlayerProfile profile, double paymentAmount) throws TransactionController {
 
         System.out.println("Server wallet address is: " + Config.getInstance().getServerWalletAddress());
         XUMM xummController = XRPTipper.getXumm();
         // Should the server wallet address be pulled from config every time? Or should it be loaded on startup?
-        xummController.paymentRequest(Config.getInstance().getServerWalletAddress(), PaymentUtils.convertIntToDrops(paymentAmount), profile.getXummToken());
+        Response response = xummController.paymentRequest(Config.getInstance().getServerWalletAddress(), PaymentUtils.convertIntToDrops(paymentAmount), profile.getXummToken());
+        JSONObject responseObject = ResponseParser.getResponseJSONObject(response);
+        boolean isPushed = ResponseParser.extractXUMMPushedStatus(responseObject);
+        if(!isPushed) {
+         
+            throw new TransactionController();
+        }
     }
 
     public static String handleRegistration(String address, Player player) {

@@ -1,7 +1,9 @@
 package com.flarecraft.xrptipper.commands;
 
+import com.flarecraft.xrptipper.XRPTipper;
 import com.flarecraft.xrptipper.datatypes.player.XRPTipperPlayer;
 import com.flarecraft.xrptipper.transactions.TransactionController;
+import com.flarecraft.xrptipper.transactions.XUMM.XUMMRegistrationTask;
 import com.flarecraft.xrptipper.util.player.UserManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -23,7 +25,7 @@ public class Tip implements CommandExecutor {
             TransactionController.tipHandler(tipperPlayer.getProfile(), paymentAmount);
         } catch(TransactionController e) {
          
-            player.sendMessage("It looks like your registration has expired. Use the link below to re-register");
+            playa.sendMessage("It looks like your registration has expired. Use the link below to re-register");
             new XUMMRegistrationTask(tipperPlayer.getProfile().getXrplAddress(), playa).runTaskLaterAsynchronously(XRPTipper.p, 60);
         }
         return true;
