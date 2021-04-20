@@ -15,16 +15,16 @@ public class Tip implements CommandExecutor {
 
         System.out.println("Player has executed the 'Tip' command");
         Player playa = (Player) sender;
-        XRPTipperPlayer test = UserManager.getPlayer(playa);
+        XRPTipperPlayer tipperPlayer = UserManager.getPlayer(playa);
         // Probably need to put a try/catch handling here to ensure that I get an Int
         double paymentAmount = Double.parseDouble(strings[0]);
         try {
         
-            TransactionController.tipHandler(test.getProfile(), paymentAmount);
+            TransactionController.tipHandler(tipperPlayer.getProfile(), paymentAmount);
         } catch(TransactionController e) {
          
             player.sendMessage("It looks like your registration has expired. Use the link below to re-register");
-            new XUMMRegistrationTask(test.getProfile().getXrplAddress(), playa).runTaskLaterAsynchronously(XRPTipper.p, 60);
+            new XUMMRegistrationTask(tipperPlayer.getProfile().getXrplAddress(), playa).runTaskLaterAsynchronously(XRPTipper.p, 60);
         }
         return true;
     }
