@@ -30,5 +30,4 @@ public class Tip implements CommandExecutor {
         }
         return true;
     }
-
 }
