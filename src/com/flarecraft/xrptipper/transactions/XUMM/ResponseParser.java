@@ -62,4 +62,17 @@ public class ResponseParser {
 
         return userToken;
     }
+    
+    public static boolean extractXUMMPushedStatus(JSONObject response) {
+
+        JSONParser parser = new JSONParser();
+        boolean pushed = true;
+        try {
+            pushed = (boolean) applicationObject.get("pushed");
+        } catch (Exception e) {
+            System.out.println("I have an exception on the extractXUMMPushedStatus: " + e);
+        }
+
+        return pushed;
+    }
 }
