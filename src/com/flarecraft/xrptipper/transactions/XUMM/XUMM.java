@@ -64,10 +64,11 @@ public class XUMM {
         try {
             System.out.println("Making the payment request");
             Response response = client.newCall(request).execute();
-            return Response;
+            return response;
         } catch (IOException e) {
             System.out.println("Exception?");
             e.printStackTrace();
+            return null;
         }
     }
 

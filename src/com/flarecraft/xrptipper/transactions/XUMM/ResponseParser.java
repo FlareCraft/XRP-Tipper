@@ -68,7 +68,7 @@ public class ResponseParser {
         JSONParser parser = new JSONParser();
         boolean pushed = true;
         try {
-            pushed = (boolean) applicationObject.get("pushed");
+            pushed = (boolean) response.get("pushed");
         } catch (Exception e) {
             System.out.println("I have an exception on the extractXUMMPushedStatus: " + e);
         }

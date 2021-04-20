@@ -14,7 +14,7 @@ import org.json.simple.JSONObject;
 
 public class TransactionController extends Exception {
 
-    public static void tipHandler(PlayerProfile profile, double paymentAmount) {
+    public static void tipHandler(PlayerProfile profile, double paymentAmount) throws TransactionController {
 
         System.out.println("Server wallet address is: " + Config.getInstance().getServerWalletAddress());
         XUMM xummController = XRPTipper.getXumm();
@@ -24,7 +24,7 @@ public class TransactionController extends Exception {
         boolean isPushed = ResponseParser.extractXUMMPushedStatus(responseObject);
         if(!isPushed) {
          
-            throw new TransactionController("Request did not push");
+            throw new TransactionController();
         }
     }
 
