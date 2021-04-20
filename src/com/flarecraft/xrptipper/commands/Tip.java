@@ -15,7 +15,7 @@ public class Tip implements CommandExecutor {
 
         System.out.println("Player has executed the 'Tip' command");
         Player playa = (Player) sender;
-        XRPTipperPlayer test = UserManager.getPlayer(playa);
+        XRPTipperPlayer tipperPlayer = UserManager.getPlayer(playa);
         // Probably need to put a try/catch handling here to ensure that I get an Int
         double paymentAmount = Double.parseDouble(strings[0]);
         try {
