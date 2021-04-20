@@ -18,8 +18,14 @@ public class Tip implements CommandExecutor {
         XRPTipperPlayer test = UserManager.getPlayer(playa);
         // Probably need to put a try/catch handling here to ensure that I get an Int
         double paymentAmount = Double.parseDouble(strings[0]);
-        TransactionController.tipHandler(test.getProfile(), paymentAmount);
+        try {
+        
+            TransactionController.tipHandler(test.getProfile(), paymentAmount);
+        } catch(TransactionController e) {
+         
+            player.sendMessage("It looks like your registration has expired. Use the link below to re-register");
+            new XUMMRegistrationTask(test.getProfile().getXrplAddress(), playa).runTaskLaterAsynchronously(XRPTipper.p, 60);
+        }
         return true;
     }
-
 }
