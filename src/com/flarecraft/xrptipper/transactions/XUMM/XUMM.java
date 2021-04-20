@@ -36,7 +36,7 @@ public class XUMM {
         return apiSecret;
     }
 
-    public void paymentRequest(String paymentDestination, BigInteger paymentAmount, String userToken) {
+    public Response paymentRequest(String paymentDestination, BigInteger paymentAmount, String userToken) {
 
         String paymentRequestJsonBody = "{ \n" +
                 "  \"txjson\": {\n" +
@@ -64,7 +64,7 @@ public class XUMM {
         try {
             System.out.println("Making the payment request");
             Response response = client.newCall(request).execute();
-            response.close();
+            return Response;
         } catch (IOException e) {
             System.out.println("Exception?");
             e.printStackTrace();
