@@ -28,7 +28,7 @@ public class TransactionController extends Exception {
         }
     }
 
-    public static String handleRegistration(String address, Player player) {
+    public static String handleRegistration(String address, Player player) throws TransactionController {
 
         XUMM xummController = XRPTipper.getXumm();
         Response response = xummController.signRequest(address);
@@ -39,11 +39,15 @@ public class TransactionController extends Exception {
         player.sendMessage("Click the link below. Scan the provided QR code with XUMM to register");
         player.sendMessage("Link: " + registrationLink);
 
-        XUMMWebSocketClient.watchForASign(registrationUUID);
+        Boolean isTimeout = XUMMWebSocketClient.watchForASign(registrationUUID);
+        if(isTimeout) {
 
+            throw new TransactionController();
+        }
         Response userTokenResponse = xummController.getUserTokenRequest(registrationUUID);
         JSONObject userTokenResponseObject = ResponseParser.getResponseJSONObject(userTokenResponse);
 
         return ResponseParser.extractXUMMUserToken(userTokenResponseObject);
     }
+
 }

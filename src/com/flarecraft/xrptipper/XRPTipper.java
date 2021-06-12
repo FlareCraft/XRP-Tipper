@@ -44,6 +44,7 @@ public class XRPTipper extends JavaPlugin {
         registerEvents();
         p.saveDefaultConfig();
         setupPaymentProviders();
+
     }
 
     @Override
