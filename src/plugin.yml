@@ -1,5 +1,5 @@
 name: XRPTipper
-version: 0.1.2
+version: 0.1.5
 author: Fabian Sordello
 main: com.flarecraft.xrptipper.XRPTipper
 api-version: 1.16

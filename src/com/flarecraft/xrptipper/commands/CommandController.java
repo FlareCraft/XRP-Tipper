@@ -7,6 +7,7 @@ public class CommandController {
 
     public static void registerCommands() {
 
+        XRPTipper.p.getLogger().info("Performing command registration");
         registerRegisterCommand();
         registerTipCommand();
     }

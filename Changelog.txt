@@ -1,3 +1,7 @@
+v0.1.5
+    Improved/cleaned up logging
+    Added exception logs that instruct server owner to setup XUMM API keys
+
 v0.1.4
     Added handling of expired/bad XUMM user tokens
 

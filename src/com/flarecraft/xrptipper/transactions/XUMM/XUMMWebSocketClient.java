@@ -1,5 +1,6 @@
 package com.flarecraft.xrptipper.transactions.XUMM;
 
+import com.flarecraft.xrptipper.XRPTipper;
 import jakarta.websocket.*;
 import org.glassfish.tyrus.client.ClientManager;
 
@@ -50,7 +51,6 @@ public class XUMMWebSocketClient {
 
             JSONParser parser = new JSONParser();
             JSONObject responseObject = (JSONObject) parser.parse(message);
-            System.out.println(responseObject);
 
             Boolean opened = (Boolean) responseObject.get("opened");
             Boolean signed = (Boolean) responseObject.get("signed");
@@ -62,7 +62,7 @@ public class XUMMWebSocketClient {
             }
             else if(opened != null && opened) {
 
-                System.out.println("Opened!");
+                XRPTipper.p.getLogger().info("Opened!");
             }
             else if (signed != null && signed && user_token != null && user_token) {
 
@@ -78,7 +78,6 @@ public class XUMMWebSocketClient {
     @OnClose
     public void onClose(Session session, CloseReason closeReason) {
 
-        System.out.println("I hit on close");
         if(closeReason.getReasonPhrase().equals("Request Timeout")) {
 
             isTimeout = true;

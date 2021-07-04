@@ -1,5 +1,6 @@
 package com.flarecraft.xrptipper.transactions.XUMM;
 
+import com.flarecraft.xrptipper.XRPTipper;
 import okhttp3.Response;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -30,7 +31,7 @@ public class ResponseParser {
             JSONObject refsObject = (JSONObject) response.get("refs");
             registrationLink = (String) refsObject.get("qr_png");
         } catch (Exception e) {
-            System.out.println("I have an exception on the extractXUMMRegistrationURL");
+            XRPTipper.p.getLogger().info("I have an exception on the extractXUMMRegistrationURL");
         }
 
         return registrationLink;
@@ -43,7 +44,7 @@ public class ResponseParser {
         try {
             registrationUUID = (String) response.get("uuid");
         } catch (Exception e) {
-            System.out.println("I have an exception on the extractXUMMRegistrationUUID: " + e);
+            XRPTipper.p.getLogger().info("I have an exception on the extractXUMMRegistrationUUID: " + e);
         }
 
         return registrationUUID;
@@ -57,7 +58,7 @@ public class ResponseParser {
             JSONObject applicationObject = (JSONObject) response.get("application");
             userToken = (String) applicationObject.get("issued_user_token");
         } catch (Exception e) {
-            System.out.println("I have an exception on the extractXUMMUserToken: " + e);
+            XRPTipper.p.getLogger().info("I have an exception on the extractXUMMUserToken: " + e);
         }
 
         return userToken;
@@ -70,7 +71,7 @@ public class ResponseParser {
         try {
             pushed = (boolean) response.get("pushed");
         } catch (Exception e) {
-            System.out.println("I have an exception on the extractXUMMPushedStatus: " + e);
+            XRPTipper.p.getLogger().info("I have an exception on the extractXUMMPushedStatus: " + e);
         }
 
         return pushed;
