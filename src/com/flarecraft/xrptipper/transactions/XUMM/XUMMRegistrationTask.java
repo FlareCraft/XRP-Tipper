@@ -20,12 +20,17 @@ public class XUMMRegistrationTask extends BukkitRunnable {
     @Override
     public void run() {
 
-        String userToken = TransactionController.handleRegistration(address, player);
-        XRPTipperPlayer XRPPlayer = UserManager.getPlayer(player);
-        PlayerProfile profile = XRPPlayer.getProfile();
-        profile.setXummToken(userToken);
+        try {
 
-        player.sendMessage("Registration complete! Use the xrptip command to send a tip.");
-        // Next I need to take the user token and apply it to the players profile.
+            String userToken = TransactionController.handleRegistration(address, player);
+            XRPTipperPlayer XRPPlayer = UserManager.getPlayer(player);
+            PlayerProfile profile = XRPPlayer.getProfile();
+            profile.setXummToken(userToken);
+            player.sendMessage("Registration complete! Use the xrptip command to send a tip.");
+        }
+        catch (TransactionController e) {
+
+            player.sendMessage ("Registration timeout. Please use /xrpregister to try again");
+        }
     }
 }

@@ -15,7 +15,7 @@ public class Tip implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] strings) {
 
-        System.out.println("Player has executed the 'Tip' command");
+        XRPTipper.p.getLogger().info("Player has executed the 'Tip' command");
         Player playa = (Player) sender;
         XRPTipperPlayer tipperPlayer = UserManager.getPlayer(playa);
         // Probably need to put a try/catch handling here to ensure that I get an Int

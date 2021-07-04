@@ -5,6 +5,7 @@ import com.flarecraft.xrptipper.datatypes.player.PlayerProfile;
 
 import java.io.*;
 import java.util.UUID;
+import java.util.function.Supplier;
 
 public class FlatfileDatabaseManager implements DatabaseManager {
 
@@ -21,17 +22,18 @@ public class FlatfileDatabaseManager implements DatabaseManager {
     private void fileChecks() {
 
         if (playerPaymentPreferencesFile.exists()) {
+
             return;
         }
-
-        System.out.println(playerPaymentPreferencesFile.getParentFile());
+        XRPTipper.p.getLogger().info(playerPaymentPreferencesFile.getParentFile().getPath());
         playerPaymentPreferencesFile.getParentFile().mkdirs();
-
         try {
 
-            System.out.println("Creating payment preferences file...");
+            XRPTipper.p.getLogger().info("Creating payment preferences file...");
             new File(XRPTipper.getPlayerPaymentPreferencesFilePath()).createNewFile();
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
+
             e.printStackTrace();
         }
     }
@@ -41,7 +43,6 @@ public class FlatfileDatabaseManager implements DatabaseManager {
 
         BufferedWriter out = null;
         synchronized (fileWritingLock) {
-
             try {
 
                 out = new BufferedWriter(new FileWriter(XRPTipper.getPlayerPaymentPreferencesFilePath(), true));
@@ -52,9 +53,11 @@ public class FlatfileDatabaseManager implements DatabaseManager {
                 out.append(uuid != null ? uuid.toString() : "NULL").append(":"); //UUID
 
                 out.newLine();
-            } catch (IOException e) {
+            }
+            catch (IOException e) {
                 e.printStackTrace();
-            } finally {
+            }
+            finally {
                 if (out != null) {
                     try {
                         out.close();

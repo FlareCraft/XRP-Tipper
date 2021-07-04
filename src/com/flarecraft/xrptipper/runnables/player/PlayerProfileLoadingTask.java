@@ -22,7 +22,7 @@ public class PlayerProfileLoadingTask extends BukkitRunnable {
         //Quit if the player is logged out
         if (!player.isOnline()) {
 
-            System.out.println("Aborting profile loading for " + player.getName() + " - player logged out");
+            XRPTipper.p.getLogger().info("Aborting profile loading for " + player.getName() + " - player logged out");
             return;
         }
 
@@ -46,14 +46,14 @@ public class PlayerProfileLoadingTask extends BukkitRunnable {
         public void run() {
 
             if (!player.isOnline()) {
-                System.out.println("Player is not online");
+                XRPTipper.p.getLogger().info("Player is not online");
                 return;
             }
 
             UserManager.track(tipperPlayer);
             // I may need to add UserManager.track(tipperPlayer) here eventually. Need to investigate more
 
-            System.out.println("Profile is loaded");
+            XRPTipper.p.getLogger().info("Profile is loaded");
         }
     }
 }

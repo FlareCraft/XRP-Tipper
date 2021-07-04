@@ -1,29 +1,36 @@
 package com.flarecraft.xrptipper.transactions.XUMM;
 
+import com.flarecraft.xrptipper.XRPTipper;
 import com.flarecraft.xrptipper.config.*;
 import okhttp3.*;
 import java.io.IOException;
 import java.math.BigInteger;
 
-public class XUMM {
+public class XUMM extends Exception {
 
     private String apiKey;
     private String apiSecret;
 
-    public XUMM() {
+    public XUMM() throws XUMM {
 
         setApiKey();
         setApiSecret();
     }
 
-    private void setApiKey() {
+    private void setApiKey() throws XUMM {
 
         this.apiKey = Config.getInstance().getXUMMApiKey();
+        if(this.apiKey == null) {
+            throw new XUMM("XUMM API Key is empty. Follow config.yml instructions to setup a key");
+        }
     }
 
-    private void setApiSecret() {
+    private void setApiSecret() throws XUMM {
 
         this.apiSecret = Config.getInstance().getXUMMApiSecret();
+        if(this.apiSecret == null) {
+            throw new XUMM("XUMM API Secret is empty. Follow config.yml instructions to setup a key");
+        }
     }
 
     private String getApiKey() {
@@ -62,11 +69,11 @@ public class XUMM {
                 .build();
 
         try {
-            System.out.println("Making the payment request");
+            XRPTipper.p.getLogger().info("Making the payment request");
             Response response = client.newCall(request).execute();
             return response;
         } catch (IOException e) {
-            System.out.println("Exception?");
+            XRPTipper.p.getLogger().info("Exception?");
             e.printStackTrace();
             return null;
         }
@@ -96,10 +103,10 @@ public class XUMM {
                 .build();
 
         try {
-            System.out.println("Making the sign request");
+            XRPTipper.p.getLogger().info("Making the sign request");
             return client.newCall(request).execute();
         } catch (IOException e) {
-            System.out.println("Exception?");
+            XRPTipper.p.getLogger().info("Exception?");
             e.printStackTrace();
         }
 
@@ -108,7 +115,7 @@ public class XUMM {
 
     public Response getUserTokenRequest(String registrationUUID) {
 
-        System.out.println("I got to the get token request");
+        XRPTipper.p.getLogger().info("I got to the get token request");
 
         // I can probably pull the code below out into a separate method to avoid duplication
         OkHttpClient client = new OkHttpClient().newBuilder().build();
@@ -121,13 +128,17 @@ public class XUMM {
                 .build();
 
         try {
-            System.out.println("Making the sign request");
+            XRPTipper.p.getLogger().info("Making the sign request");
             return client.newCall(request).execute();
         } catch (IOException e) {
-            System.out.println("Exception?");
+            XRPTipper.p.getLogger().info("Exception?");
             e.printStackTrace();
         }
 
         return null;
+    }
+
+    public XUMM(String errorMessage) {
+        super(errorMessage);
     }
 }

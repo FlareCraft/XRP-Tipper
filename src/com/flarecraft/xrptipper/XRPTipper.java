@@ -5,6 +5,7 @@ import com.flarecraft.xrptipper.database.DatabaseManager;
 import com.flarecraft.xrptipper.database.DatabaseManagerFactory;
 import com.flarecraft.xrptipper.listeners.PlayerListener;
 import com.flarecraft.xrptipper.transactions.XUMM.XUMM;
+import com.flarecraft.xrptipper.util.LogFilter;
 import com.flarecraft.xrptipper.util.player.UserManager;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -39,11 +40,20 @@ public class XRPTipper extends JavaPlugin {
     public void onEnable() {
 
         setupFilePaths();
+        getLogger().setFilter(new LogFilter(this));
         databaseManager = DatabaseManagerFactory.getDatabaseManager();
         CommandController.registerCommands();
         registerEvents();
         p.saveDefaultConfig();
-        setupPaymentProviders();
+        try {
+
+            setupPaymentProviders();
+        }
+        catch (XUMM e) {
+
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -90,15 +100,16 @@ public class XRPTipper extends JavaPlugin {
 
         //xrptipper = getFile();
         mainDirectory = getDataFolder().getPath() + File.separator;
-        System.out.println("mainDirectory: " + mainDirectory);
+        XRPTipper.p.getLogger().info("mainDirectory: " + mainDirectory);
         flatFileDirectory = mainDirectory + "flatfile" + File.separator;
-        System.out.println("flatFileDirectory: " + flatFileDirectory);
+        XRPTipper.p.getLogger().info("flatFileDirectory: " + flatFileDirectory);
         playerPaymentPreferencesFile = flatFileDirectory + "xrptipper.paymentpreferences";
-        System.out.println("playerPaymentPreferencesFile: " + playerPaymentPreferencesFile);
+        XRPTipper.p.getLogger().info("playerPaymentPreferencesFile: " + playerPaymentPreferencesFile);
     }
 
-    private void setupPaymentProviders() {
+    private void setupPaymentProviders() throws XUMM {
 
+        XRPTipper.p.getLogger().info("Instantiating Payment Providers (XUMM)");
         xumm = new XUMM();
     }
 
@@ -109,6 +120,7 @@ public class XRPTipper extends JavaPlugin {
 
     private void registerEvents() {
 
+        XRPTipper.p.getLogger().info("Performing event registration");
         PluginManager pluginManager = getServer().getPluginManager();
         pluginManager.registerEvents(new PlayerListener(), this);
     }

@@ -1,6 +1,7 @@
 ## General settings ##
 ## A single whitespace is needed after the colons where settings are adjusted##
 General: ## Nothing goes here ##
+  Verbose_Logging: false
   Server: ## Nothing goes here ##
     # Tips to the server will be sent to this address
     XRP_Wallet_Address:
