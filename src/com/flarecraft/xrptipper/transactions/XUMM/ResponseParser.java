@@ -23,6 +23,21 @@ public class ResponseParser {
         return responseObject;
     }
 
+    //TODO: this should be a single method that takes an array. Loop through the array to get to the level of the JSON body you want
+    public static long checkResponseCode(JSONObject response) {
+        JSONParser parser = new JSONParser();
+        long responseCode = 0;
+        try {
+            JSONObject refsObject = (JSONObject) response.get("error");
+            responseCode = (long) refsObject.get("code");
+        } catch (Exception e) {
+            XRPTipper.p.getLogger().info("I have an exception on the checkResponseCode method");
+        }
+
+        return responseCode;
+    }
+
+    //TODO: this should be a single method that takes an array. Loop through the array to get to the level of the JSON body you want
     public static String extractXUMMRegistrationURL(JSONObject response) {
 
         JSONParser parser = new JSONParser();
@@ -37,6 +52,7 @@ public class ResponseParser {
         return registrationLink;
     }
 
+    //TODO: See above
     public static String extractXUMMRegistrationUUID(JSONObject response) {
 
         JSONParser parser = new JSONParser();

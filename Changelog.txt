@@ -1,14 +1,19 @@
-v0.1.5
+v0.1.6:
+    Added validation to prevent tips smaller than 1 drop.
+    Added messaging/exception handling if an unregistered player uses /xrptip
+    Informed the player if they try to register with a bad xrp address
+
+v0.1.5:
     Improved/cleaned up logging
     Added exception logs that instruct server owner to setup XUMM API keys
 
-v0.1.4
+v0.1.4:
     Added handling of expired/bad XUMM user tokens
 
-v0.1.3
+v0.1.3:
     Server shutdown now saves player profiles
 
-v0.1.2
+v0.1.2:
     Cleanup logging
     Added player messaging to let them know registration was successful
     Made config.yml more user friendly and added instructions

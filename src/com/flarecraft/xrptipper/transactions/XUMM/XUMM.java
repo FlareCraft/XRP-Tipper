@@ -3,6 +3,9 @@ package com.flarecraft.xrptipper.transactions.XUMM;
 import com.flarecraft.xrptipper.XRPTipper;
 import com.flarecraft.xrptipper.config.*;
 import okhttp3.*;
+import org.bukkit.entity.Player;
+import org.json.simple.JSONObject;
+
 import java.io.IOException;
 import java.math.BigInteger;
 
@@ -136,6 +139,17 @@ public class XUMM extends Exception {
         }
 
         return null;
+    }
+
+    public Boolean validatePaymentAmount(String currencyType, Double paymentAmount, Player player ) {
+
+        if(currencyType.equals("XRP") && paymentAmount < .000001) {
+
+            player.sendMessage("Your tip is too small! Try a tip larger than 6 decimal places");
+            return false;
+        }
+
+        return true;
     }
 
     public XUMM(String errorMessage) {

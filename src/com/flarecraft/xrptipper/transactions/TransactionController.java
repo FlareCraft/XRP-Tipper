@@ -14,17 +14,25 @@ import org.json.simple.JSONObject;
 
 public class TransactionController extends Exception {
 
-    public static void tipHandler(PlayerProfile profile, double paymentAmount) throws TransactionController {
+    public static void tipHandler(PlayerProfile profile, double paymentAmount, Player player) throws TransactionController {
 
         XRPTipper.p.getLogger().info("Server wallet address is: " + Config.getInstance().getServerWalletAddress());
         XUMM xummController = XRPTipper.getXumm();
         // Should the server wallet address be pulled from config every time? Or should it be loaded on startup?
-        Response response = xummController.paymentRequest(Config.getInstance().getServerWalletAddress(), PaymentUtils.convertIntToDrops(paymentAmount), profile.getXummToken());
-        JSONObject responseObject = ResponseParser.getResponseJSONObject(response);
-        boolean isPushed = ResponseParser.extractXUMMPushedStatus(responseObject);
-        if(!isPushed) {
-         
-            throw new TransactionController();
+        Boolean isValidAmount = xummController.validatePaymentAmount("XRP", paymentAmount, player);
+
+        if(isValidAmount) {
+
+            Response response = xummController.paymentRequest(Config.getInstance().getServerWalletAddress(), PaymentUtils.convertIntToDrops(paymentAmount), profile.getXummToken());
+            JSONObject responseObject = ResponseParser.getResponseJSONObject(response);
+            boolean isPushed = ResponseParser.extractXUMMPushedStatus(responseObject);
+            if(!isPushed) {
+
+                throw new TransactionController("Push failed");
+            }
+        }
+        else {
+            throw new TransactionController("Invalid Amount for XRP");
         }
     }
 
@@ -33,6 +41,11 @@ public class TransactionController extends Exception {
         XUMM xummController = XRPTipper.getXumm();
         Response response = xummController.signRequest(address);
         JSONObject responseObject = ResponseParser.getResponseJSONObject(response);
+        long responseCode = ResponseParser.checkResponseCode(responseObject);
+        if(responseCode == 603) {
+
+            throw new TransactionController("Bad Address");
+        }
         String registrationLink = ResponseParser.extractXUMMRegistrationURL(responseObject);
         String registrationUUID = ResponseParser.extractXUMMRegistrationUUID(responseObject);
 
@@ -42,12 +55,17 @@ public class TransactionController extends Exception {
         Boolean isTimeout = XUMMWebSocketClient.watchForASign(registrationUUID);
         if(isTimeout) {
 
-            throw new TransactionController();
+            throw new TransactionController("Expired registration link");
         }
         Response userTokenResponse = xummController.getUserTokenRequest(registrationUUID);
         JSONObject userTokenResponseObject = ResponseParser.getResponseJSONObject(userTokenResponse);
 
         return ResponseParser.extractXUMMUserToken(userTokenResponseObject);
+    }
+
+    public TransactionController(String errorMessage) {
+
+        super(errorMessage);
     }
 
 }

@@ -21,7 +21,7 @@ public class Register implements CommandExecutor {
         Player playa = (Player) sender;
         if (args.length == 0) {
 
-            playa.sendMessage("Include an XRP wallet address to register. ex: /register [xrplAddress]");
+            playa.sendMessage("[ERROR] Include an XRP wallet address to register. ex: /xrpregister [xrplAddress]");
             return false;
         }
 

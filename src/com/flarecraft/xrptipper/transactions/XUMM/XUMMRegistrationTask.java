@@ -30,7 +30,14 @@ public class XUMMRegistrationTask extends BukkitRunnable {
         }
         catch (TransactionController e) {
 
-            player.sendMessage ("Registration timeout. Please use /xrpregister to try again");
+            if (e.getMessage().equals("Bad Address")) {
+
+                player.sendMessage("[ERROR] Provided XRP address is not valid. Please use your wallet's public address");
+            }
+            else {
+
+                player.sendMessage ("Registration timeout. Please use /xrpregister to try again");
+            }
         }
     }
 }

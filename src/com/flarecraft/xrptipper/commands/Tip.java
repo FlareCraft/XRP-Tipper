@@ -5,6 +5,7 @@ import com.flarecraft.xrptipper.datatypes.player.XRPTipperPlayer;
 import com.flarecraft.xrptipper.transactions.TransactionController;
 import com.flarecraft.xrptipper.transactions.XUMM.XUMMRegistrationTask;
 import com.flarecraft.xrptipper.util.player.UserManager;
+import org.apache.commons.lang.ObjectUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -18,15 +19,20 @@ public class Tip implements CommandExecutor {
         XRPTipper.p.getLogger().info("Player has executed the 'Tip' command");
         Player playa = (Player) sender;
         XRPTipperPlayer tipperPlayer = UserManager.getPlayer(playa);
-        // Probably need to put a try/catch handling here to ensure that I get an Int
         double paymentAmount = Double.parseDouble(strings[0]);
         try {
         
-            TransactionController.tipHandler(tipperPlayer.getProfile(), paymentAmount);
+            TransactionController.tipHandler(tipperPlayer.getProfile(), paymentAmount, playa);
         } catch(TransactionController e) {
-         
-            playa.sendMessage("It looks like your registration has expired. Use the link below to re-register");
-            new XUMMRegistrationTask(tipperPlayer.getProfile().getXrplAddress(), playa).runTaskLaterAsynchronously(XRPTipper.p, 60);
+
+            if(e.getMessage().equals("Expired registration link")) {
+
+                playa.sendMessage("It looks like your registration has expired. Use the link below to re-register");
+                new XUMMRegistrationTask(tipperPlayer.getProfile().getXrplAddress(), playa).runTaskLaterAsynchronously(XRPTipper.p, 60);
+            }
+        } catch(NullPointerException e) {
+
+            playa.sendMessage("[ERROR] Register your wallet using the /xrpregister command before using /xrptip");
         }
         return true;
     }
