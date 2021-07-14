@@ -7,6 +7,7 @@ import com.flarecraft.xrptipper.listeners.PlayerListener;
 import com.flarecraft.xrptipper.transactions.XUMM.XUMM;
 import com.flarecraft.xrptipper.util.LogFilter;
 import com.flarecraft.xrptipper.util.player.UserManager;
+import de.jeff_media.updatechecker.UpdateChecker;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -36,9 +37,13 @@ public class XRPTipper extends JavaPlugin {
     /* Payment Providers */
     private static XUMM xumm;
 
+    /* Update Checker*/
+    private static final int SPIGOT_RESOURCE_ID = 90800;
+
     @Override
     public void onEnable() {
 
+        UpdateChecker.init(this, SPIGOT_RESOURCE_ID).checkEveryXHours(24).checkNow();
         setupFilePaths();
         getLogger().setFilter(new LogFilter(this));
         databaseManager = DatabaseManagerFactory.getDatabaseManager();
