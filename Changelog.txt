@@ -1,5 +1,8 @@
+v0.1.7:
+    Added an update checker. Informs the OPs if there is a plugin update on start and every 24 hours
+
 v0.1.6:
-    Added validation to prevent tips smaller than 1 drop.
+    Added validation to prevent tips smaller than 1 drop
     Added messaging/exception handling if an unregistered player uses /xrptip
     Informed the player if they try to register with a bad xrp address
 
