@@ -1,3 +1,6 @@
+v1.0.0:
+    Added player to player payments. Now anyone with a XUMM wallet can transact seamlessly on the XRPL in game!
+
 v0.1.7:
     Added an update checker. Informs the OPs if there is a plugin update on start and every 24 hours
 

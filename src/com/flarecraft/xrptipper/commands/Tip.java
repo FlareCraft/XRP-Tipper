@@ -34,6 +34,7 @@ public class Tip implements CommandExecutor {
 
             playa.sendMessage("[ERROR] Register your wallet using the /xrpregister command before using /xrptip");
         }
+
         return true;
     }
 }

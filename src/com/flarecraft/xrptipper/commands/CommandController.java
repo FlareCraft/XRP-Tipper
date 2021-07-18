@@ -10,6 +10,7 @@ public class CommandController {
         XRPTipper.p.getLogger().info("Performing command registration");
         registerRegisterCommand();
         registerTipCommand();
+        registerSendCommand();
     }
 
     private static void registerRegisterCommand() {
@@ -24,5 +25,12 @@ public class CommandController {
         PluginCommand command = XRPTipper.p.getCommand("xrpTip");
         command.setDescription("Send this server a tip.....in XRP!");
         command.setExecutor(new Tip());
+    }
+
+    private static void registerSendCommand() {
+
+        PluginCommand command = XRPTipper.p.getCommand("xrpSend");
+        command.setDescription("Send a tip to another player! /xrptip [playerName] [amount]");
+        command.setExecutor(new Send());
     }
 }
