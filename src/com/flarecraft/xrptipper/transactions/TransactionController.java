@@ -67,7 +67,6 @@ public class TransactionController extends Exception {
 
     public static void sendHandler(PlayerProfile senderProfile, double paymentAmount, Player sendingPlayer, Player receivingPlayer) throws TransactionController {
 
-        XRPTipper.p.getLogger().info("Server wallet address is: " + Config.getInstance().getServerWalletAddress());
         XUMM xummController = XRPTipper.getXumm();
         // Should the server wallet address be pulled from config every time? Or should it be loaded on startup?
         Boolean isValidAmount = xummController.validatePaymentAmount("XRP", paymentAmount, sendingPlayer);
