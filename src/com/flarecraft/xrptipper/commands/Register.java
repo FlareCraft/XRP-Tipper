@@ -5,7 +5,6 @@ import com.flarecraft.xrptipper.database.DatabaseManager;
 import com.flarecraft.xrptipper.datatypes.player.PlayerProfile;
 import com.flarecraft.xrptipper.datatypes.player.XRPTipperPlayer;
 import com.flarecraft.xrptipper.runnables.player.PlayerProfileLoadingTask;
-import com.flarecraft.xrptipper.transactions.TransactionController;
 import com.flarecraft.xrptipper.transactions.XUMM.XUMMRegistrationTask;
 import com.flarecraft.xrptipper.util.player.UserManager;
 import org.bukkit.command.Command;
