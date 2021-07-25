@@ -5,7 +5,6 @@ import com.flarecraft.xrptipper.datatypes.player.XRPTipperPlayer;
 import com.flarecraft.xrptipper.transactions.TransactionController;
 import com.flarecraft.xrptipper.transactions.XUMM.XUMMRegistrationTask;
 import com.flarecraft.xrptipper.util.player.UserManager;
-import org.apache.commons.lang.ObjectUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -34,6 +33,7 @@ public class Tip implements CommandExecutor {
 
             playa.sendMessage("[ERROR] Register your wallet using the /xrpregister command before using /xrptip");
         }
+
         return true;
     }
 }
