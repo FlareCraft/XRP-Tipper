@@ -18,11 +18,6 @@ public class Register implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         Player playa = (Player) sender;
-        if (args.length == 0) {
-
-            playa.sendMessage("[ERROR] Include an XRP wallet address to register. ex: /xrpregister [xrplAddress]");
-            return false;
-        }
 
         //if profile doesn't exist, create user in flatfile
         try {
@@ -30,15 +25,14 @@ public class Register implements CommandExecutor {
             XRPTipperPlayer player = UserManager.getPlayer(playa);
             PlayerProfile profile = player.getProfile();
 
-            profile.setXrplAddress(args[0]);
         } catch (NullPointerException e) {
 
             DatabaseManager dbManager = XRPTipper.getDatabaseManager();
-            dbManager.newUser(sender.getName(), playa.getUniqueId(), args[0]);
+            dbManager.newUser(sender.getName(), playa.getUniqueId(), "");
             new PlayerProfileLoadingTask(playa).runTaskLaterAsynchronously(XRPTipper.p, 60);
         }
 
-        new XUMMRegistrationTask(args[0], playa).runTaskLaterAsynchronously(XRPTipper.p, 60);
+        new XUMMRegistrationTask("", playa).runTaskLaterAsynchronously(XRPTipper.p, 60);
 
         /* Eventually I would like the newUser function to be very barebones and then all the preferences
         * get added via their own method */

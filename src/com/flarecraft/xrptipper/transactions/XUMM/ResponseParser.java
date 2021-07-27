@@ -79,6 +79,20 @@ public class ResponseParser {
 
         return userToken;
     }
+
+    public static String extractXUMMPublicAddress(JSONObject response) {
+
+        JSONParser parser = new JSONParser();
+        String publicAddress = null;
+        try {
+            JSONObject responseObject = (JSONObject) response.get("response");
+            publicAddress = (String) responseObject.get("account");
+        } catch (Exception e) {
+            XRPTipper.p.getLogger().info("I have an exception on the extractXUMMUserToken: " + e);
+        }
+
+        return publicAddress;
+    }
     
     public static boolean extractXUMMPushedStatus(JSONObject response) {
 

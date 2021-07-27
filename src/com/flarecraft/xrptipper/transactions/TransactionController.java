@@ -41,13 +41,9 @@ public class TransactionController extends Exception {
     public static String handleRegistration(String address, Player player) throws TransactionController {
 
         XUMM xummController = XRPTipper.getXumm();
-        Response response = xummController.signRequest(address);
+        Response response = xummController.signRequest();
         JSONObject responseObject = ResponseParser.getResponseJSONObject(response);
-        long responseCode = ResponseParser.checkResponseCode(responseObject);
-        if(responseCode == 603) {
 
-            throw new TransactionController("Bad Address");
-        }
         String registrationLink = ResponseParser.extractXUMMRegistrationURL(responseObject);
         String registrationUUID = ResponseParser.extractXUMMRegistrationUUID(responseObject);
 
@@ -61,6 +57,11 @@ public class TransactionController extends Exception {
         }
         Response userTokenResponse = xummController.getUserTokenRequest(registrationUUID);
         JSONObject userTokenResponseObject = ResponseParser.getResponseJSONObject(userTokenResponse);
+        String publicAddress = ResponseParser.extractXUMMPublicAddress(userTokenResponseObject);
+
+        XRPTipperPlayer tipperPlayer = UserManager.getPlayer(player);
+        PlayerProfile playerProfile = tipperPlayer.getProfile();
+        playerProfile.setXrplAddress(publicAddress);
 
         return ResponseParser.extractXUMMUserToken(userTokenResponseObject);
     }

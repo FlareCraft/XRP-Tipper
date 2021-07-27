@@ -85,7 +85,7 @@ public class XUMMWebSocketClient {
         latch.countDown();
     }
 
-    public static Boolean watchForASign(String signUUID) /*throws XUMMWebSocketClient*/ {
+    public static Boolean watchForASign(String signUUID) {
 
         latch = new CountDownLatch(1);
         ClientManager client = ClientManager.createClient();
