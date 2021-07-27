@@ -2,7 +2,6 @@ package com.flarecraft.xrptipper.database;
 
 import com.flarecraft.xrptipper.datatypes.player.PlayerProfile;
 
-import java.util.List;
 import java.util.UUID;
 
 public interface DatabaseManager {

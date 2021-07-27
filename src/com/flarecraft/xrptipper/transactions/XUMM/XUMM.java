@@ -82,12 +82,11 @@ public class XUMM extends Exception {
         }
     }
 
-    public Response signRequest(String userAddress) {
+    public Response signRequest() {
 
         String signRequestJSONBody = "{\n" +
                 "   \"txjson\":{\n" +
-                "       \"TransactionType\":\"SignIn\",\n" +
-                "       \"Destination\":\"" + userAddress + "\"\n" +
+                "       \"TransactionType\":\"SignIn\"\n" +
                 "   }\n" +
                 "}";
 

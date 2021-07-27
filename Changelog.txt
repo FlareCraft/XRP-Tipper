@@ -1,3 +1,6 @@
+v1.0.1:
+    Users no longer need to copy/paste their public address when using /xrpregister
+
 v1.0.0:
     Added player to player payments. Now anyone with a XUMM wallet can transact seamlessly on the XRPL in game!
 
